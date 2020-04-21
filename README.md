@@ -11,19 +11,19 @@
     <img src="relativeimagepath" alt="Logo" width="468" height="463">                           
 </a>
 
-  <h3 align="center">Name of The Project</h3>
+  <h3 align="center">Gantt Generator for TrampolineRTOS</h3>
 
   <p align="center">
-    What does it do ? Briefly.
+    Generating GANTT scheduling diagrams from Trampoline's tracebacks
     <br />
-    <a href="https://github.com/master-coro/template/readme.md"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/guilyx/gantt-trampoline/readme.md"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/master-coro/template">View Demo</a>
+    <a href="https://github.com/guilyx/gantt-trampoline">View Demo</a>
     ·
-    <a href="https://github.com/master-coro/template/issues">Report Bug</a>
+    <a href="https://github.com/guilyx/gantt-trampoline/issues">Report Bug</a>
     ·
-    <a href="https://github.com/master-coro/template/issues">Request Feature</a>
+    <a href="https://github.com/guilyx/gantt-trampoline/issues">Request Feature</a>
   </p>
 </p>
 
@@ -49,6 +49,8 @@
 <br />
 <br />
 
+[TrampolineRTOS](https://github.com/jevgeniy/TrampolineRTOS) is a RTOS built by academia in Nantes, France. Every RT applications you built leaves a trace with the tasks and events states. I want to built a tool that transcripts the trace output into Gantt Diagrams.
+
 <!---- Could add a more in depth description here -->
 
 <p align="center">
@@ -59,7 +61,7 @@
 ## Setup
 
 1. (Optional) Click on `Fork`
-2. Clone the project on your local machine : `git clone https://github.com/master-coro/template.git`
+2. Clone the project on your local machine : `git clone https://github.com/guilyx/gantt-trampoline.git`
 3. Install dependencies : `insert line to meet dependencies`
 
 ## Run
@@ -68,7 +70,7 @@
 
 ## Roadmap
 
-See the [open issues](https://github.com/master-coro/template/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/guilyx/gantt-trampoline/issues) for a list of proposed features (and known issues).
 
 ## Contribute
 
@@ -76,7 +78,7 @@ Contributions are what make the open source community such an amazing place to l
 
 ### Contribute on proposed features
 
-1. Choose any open issue from [here](https://github.com/master-coro/template/issues). 
+1. Choose any open issue from [here](https://github.com/guilyx/gantt-trampoline/issues). 
 2. Comment on the issue: `Can I work on this?` and get assigned.
 3. Make changes to your `Fork` and send a PR.
 
@@ -115,15 +117,15 @@ Erwin Lejeune - [@spida_rwin](https://twitter.com/spida_rwin) - erwin.lejeune15@
 
 - [Erwin Lejeune](https://github.com/Guilyx)
 
-[contributors-shield]: https://img.shields.io/github/contributors/master-coro/template.svg?style=flat-square
-[contributors-url]: https://github.com/master-coro/template/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/master-coro/template.svg?style=flat-square
-[forks-url]: https://github.com/master-coro/template/network/members
-[stars-shield]: https://img.shields.io/github/stars/master-coro/template.svg?style=flat-square
-[stars-url]: https://github.com/master-coro/template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/master-coro/template.svg?style=flat-square
-[issues-url]: https://github.com/master-coro/template/issues
-[license-shield]: https://img.shields.io/github/license/master-coro/template.svg?style=flat-square
-[license-url]: https://github.com/master-coro/template/blob/master/LICENSE.md
+[contributors-shield]: https://img.shields.io/github/contributors/guilyx/gantt-trampoline.svg?style=flat-square
+[contributors-url]: https://github.com/guilyx/gantt-trampoline/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/guilyx/gantt-trampoline.svg?style=flat-square
+[forks-url]: https://github.com/guilyx/gantt-trampoline/network/members
+[stars-shield]: https://img.shields.io/github/stars/guilyx/gantt-trampoline.svg?style=flat-square
+[stars-url]: https://github.com/guilyx/gantt-trampoline/stargazers
+[issues-shield]: https://img.shields.io/github/issues/guilyx/gantt-trampoline.svg?style=flat-square
+[issues-url]: https://github.com/guilyx/gantt-trampoline/issues
+[license-shield]: https://img.shields.io/github/license/guilyx/gantt-trampoline.svg?style=flat-square
+[license-url]: https://github.com/guilyx/gantt-trampoline/blob/master/LICENSE.md
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/erwinlejeune-lkn
