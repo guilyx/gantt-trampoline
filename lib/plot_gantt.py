@@ -18,7 +18,7 @@ class GanttPlot():
 
         # Define available y position
         self.available_y = []
-        index = 0
+        index = 1
         while index < ylim:
             self.available_y.append((index, 2))
             index += 3

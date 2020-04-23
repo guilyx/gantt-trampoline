@@ -8,7 +8,7 @@
 <br />
 <p align="center">
     <!--- relative path means image/image.png instead of https://etc... -->
-    <img src="relativeimagepath" alt="Logo" width="468" height="463">                           
+    <img src="img/gantt" alt="Logo" width="468" height="463">                           
 </a>
 
   <h3 align="center">Gantt Generator for TrampolineRTOS</h3>
@@ -40,23 +40,7 @@
 
 ## About the Project
 
-<!---- what? who? how? what for? for whom? -->
-
-<p align="center">
-    <img src="image/of/the/project" alt="graph" width="800" height="300">
-  </a>
-</p>
-<br />
-<br />
-
-[TrampolineRTOS](https://github.com/jevgeniy/TrampolineRTOS) is a RTOS built by academia in Nantes, France. Every RT applications you built leaves a trace with the tasks and events states. I want to built a tool that transcripts the trace output into Gantt Diagrams.
-
-<!---- Could add a more in depth description here -->
-
-<p align="center">
-    <img src="image" alt="Logo" width="800" height="300">
-  </a>
-</p>
+[TrampolineRTOS](https://github.com/TrampolineRTOS/trampoline) is a RTOS built by academia in Nantes, France. Every RT applications you built leaves a trace with the tasks and events states at time t. The goal is to generate Gantt Plots from this trace.
 
 ## Setup
 
