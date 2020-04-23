@@ -27,6 +27,12 @@ class TaskMaster():
     
     def checkSchedule(self):
         # Implement method to check if there are schedule conflict with registered tasks
+        # Check if a task starts during another task
+        # Check if two tasks start at the same time
+        pass
+
+    def maxRunningTime(self):
+        # Implement method to get the max running time and pass it to xlim
         pass
 
 class Task():
