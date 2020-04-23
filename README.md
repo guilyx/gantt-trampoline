@@ -5,10 +5,9 @@
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
-<br />
 <p align="center">
     <!--- relative path means image/image.png instead of https://etc... -->
-    <img src="img/gantt.png" alt="Logo" width="468" height="463">                           
+    <img src="img/gantt.png" width="468" height="463">                           
 </a>
 
   <h3 align="center">Gantt Generator for TrampolineRTOS</h3>
