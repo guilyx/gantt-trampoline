@@ -1,0 +1,21 @@
+{
+    "0": {
+        "proc": "idle, READY_AND_NEW"
+    }
+}{
+    "0": {
+        "proc": "task1, READY_AND_NEW"
+    }
+}{
+    "0": {
+        "proc": "task1, RUNNING"
+    }
+}{
+    "0": {
+        "proc": "task1, SUSPENDED"
+    }
+}{
+    "0": {
+        "proc": "idle, RUNNING"
+    }
+}

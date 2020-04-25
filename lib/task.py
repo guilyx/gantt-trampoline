@@ -48,10 +48,15 @@ class TaskMaster():
                 conflicts += 1
         
         if conflicts:
-            print("Conflicts when scheduling task == ", task.name, "== not scheduling it !")
-            return False
+            print("Conflicts when scheduling task == ", task.name, "== ! Resolving...")
+            resolved = self.__resolveConflicts(task, index_running, conflicts)
+            return resolved
         else: 
             return True
+    
+    def __resolveConflicts(self, task, running_, conflicts):
+        # resolve conflicts if any
+        return False
 
     def __newMaxRunningTime(self):
         lastTaskKey = max(
