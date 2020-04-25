@@ -5,7 +5,7 @@ import numpy as np
 
 class GanttPlot():
     def __init__(self, ylim, xlim):
-        self.fig, self.gnt = plt.subplots()
+        self.fig, self.gnt = plt.subplots(figsize=(12, 8))
         self.gnt.set_ylim(0, ylim)
         self.gnt.set_xlim(0, xlim)
         self.ylim = ylim
@@ -58,7 +58,7 @@ class GanttPlot():
             self.gnt.set_yticklabels(labels=self.ylabels)
             self.numberTasks += 1
             self.gnt.arrow(
-                task.activationTime, y_index[0]-0.2, 0, 2, color='red', width=0.8, head_width=0.6)
+                task.activationTime, y_index[0]-0.2, 0, 2, color='red', width=1, head_width=0.6)
 
     def terminateTask(self, task):
         y_index = self.tasksYticks[task.name]

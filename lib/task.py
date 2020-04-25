@@ -25,7 +25,7 @@ class TaskMaster():
         self.timelineAvailability = [True for _ in range(0, 500)]
         self.lastTask = None
 
-    def registerTask(self, task, running=False):
+    def registerTask(self, task, running=True):
         resolved = self.__checkConflicts(task)
         if resolved:
             if task.name not in self.tasks:
@@ -134,7 +134,9 @@ class TaskMaster():
             self.gnt = GanttPlot(self.tasks_n*3, self.maxRunningTime)
             for elem in self.tasks:
                 currentTask = self.tasks[elem]
+                self.gnt.activateTask(currentTask)
                 self.gnt.addTask(currentTask)
+                self.gnt.terminateTask(currentTask)
             self.gnt.show()
         else:
             print("Warning : trying to plot a schedule without task")

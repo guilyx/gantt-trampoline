@@ -165,4 +165,4 @@ class TraceGenerator():
 
 if __name__ == "__main__":
     rt = TraceGenerator()
-    rt.writeTrace('traceTest.json')
+    rt.writeTrace('generatedTrace.json')
