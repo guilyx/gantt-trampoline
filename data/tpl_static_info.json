@@ -9,6 +9,17 @@
     
     {
       "ACTIVATION" : 1,
+      "AUTOSTART" : "false",
+      "KIND" : "Task",
+      "NAME" : "task2",
+      "NONPREEMPTABLE" : "false",
+      "PRIORITY" : 1,
+      "SCHEDULE" : "FULL",
+      "STACKSIZE" : 32768,
+      "USEINTERNALRESOURCE" : "false"
+    },    
+    {
+      "ACTIVATION" : 1,
       "AUTOSTART" : "true",
       "AUTOSTART_S" : 
       {
@@ -23,7 +34,18 @@
       "KIND" : "Task",
       "NAME" : "task1",
       "NONPREEMPTABLE" : "false",
-      "PRIORITY" : 1,
+      "PRIORITY" : 2,
+      "SCHEDULE" : "FULL",
+      "STACKSIZE" : 32768,
+      "USEINTERNALRESOURCE" : "false"
+    },    
+    {
+      "ACTIVATION" : 1,
+      "AUTOSTART" : "false",
+      "KIND" : "Task",
+      "NAME" : "task3",
+      "NONPREEMPTABLE" : "false",
+      "PRIORITY" : 3,
       "SCHEDULE" : "FULL",
       "STACKSIZE" : 32768,
       "USEINTERNALRESOURCE" : "false"

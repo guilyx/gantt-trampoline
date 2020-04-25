@@ -3,14 +3,62 @@
 	{
 		"type":"proc",
 		"ts":"0",
+		"proc_id":"3",
+		"target_state":"5"
+	},
+	{
+		"type":"proc",
+		"ts":"0",
 		"proc_id":"1",
 		"target_state":"5"
 	},
 	{
 		"type":"proc",
 		"ts":"0",
+		"proc_id":"1",
+		"target_state":"2"
+	},
+	{
+		"type":"proc",
+		"ts":"0",
 		"proc_id":"0",
 		"target_state":"5"
+	},
+	{
+		"type":"proc",
+		"ts":"0",
+		"proc_id":"2",
+		"target_state":"5"
+	},
+	{
+		"type":"proc",
+		"ts":"0",
+		"proc_id":"1",
+		"target_state":"1"
+	},
+	{
+		"type":"proc",
+		"ts":"0",
+		"proc_id":"2",
+		"target_state":"2"
+	},
+	{
+		"type":"proc",
+		"ts":"0",
+		"proc_id":"2",
+		"target_state":"0"
+	},
+	{
+		"type":"proc",
+		"ts":"0",
+		"proc_id":"1",
+		"target_state":"2"
+	},
+	{
+		"type":"proc",
+		"ts":"0",
+		"proc_id":"1",
+		"target_state":"0"
 	},
 	{
 		"type":"proc",
@@ -27,6 +75,6 @@
 	{
 		"type":"proc",
 		"ts":"0",
-		"proc_id":"1",
+		"proc_id":"3",
 		"target_state":"2"
 	}]

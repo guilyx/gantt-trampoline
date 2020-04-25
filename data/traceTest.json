@@ -12,7 +12,39 @@
     }
 }{
     "0": {
+        "proc": "task2, READY_AND_NEW"
+    }
+}{
+    "0": {
+        "proc": "task3, READY_AND_NEW"
+    }
+}{
+    "0": {
+        "proc": "task1, READY"
+    }
+}{
+    "0": {
+        "proc": "task3, RUNNING"
+    }
+}{
+    "0": {
+        "proc": "task3, SUSPENDED"
+    }
+}{
+    "0": {
+        "proc": "task1, RUNNING"
+    }
+}{
+    "0": {
         "proc": "task1, SUSPENDED"
+    }
+}{
+    "0": {
+        "proc": "task2, RUNNING"
+    }
+}{
+    "0": {
+        "proc": "task2, SUSPENDED"
     }
 }{
     "0": {

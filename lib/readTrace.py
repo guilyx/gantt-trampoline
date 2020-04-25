@@ -6,8 +6,8 @@ import sys
 import os
 
 
-class ReadTrace():
-    def __init__(self, static_info_filename, trace_filename):
+class TraceGenerator():
+    def __init__(self, static_info_filename='../data/tpl_static_info.json', trace_filename='../data/trace.json'):
 
         # ---------------------------------
         # read static information JSON file
@@ -18,7 +18,7 @@ class ReadTrace():
                 self.staticInfo = json.load(self.staticInfoFile)
         except OSError as e:
             print('static information file not found (events.json). '
-                  'You should enable the self.trace in the .oil file and '
+                  'You should enable the trace in the .oil file and '
                   'recompile your application.')
             sys.exit(1)
 
@@ -30,7 +30,7 @@ class ReadTrace():
             with open(trace_filename) as self.traceFile:
                 self.trace = json.load(self.traceFile)
         except OSError as e:
-            print('self.trace file not found (self.trace.json). '
+            print('trace file not found (trace.json). '
                   'You should run your application.')
             sys.exit(1)
 
@@ -164,5 +164,5 @@ class ReadTrace():
             pass
 
 if __name__ == "__main__":
-    rt = ReadTrace('../data/tpl_static_info.json', '../data/trace.json')
+    rt = TraceGenerator()
     rt.writeTrace('traceTest.json')
