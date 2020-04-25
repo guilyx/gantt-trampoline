@@ -15,7 +15,7 @@
   <p align="center">
     Generating GANTT scheduling diagrams from Trampoline's tracebacks
     <br />
-    <a href="https://github.com/guilyx/gantt-trampoline/readme.md"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/Guilyx/gantt-trampoline/blob/master/README.md"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="https://github.com/guilyx/gantt-trampoline">View Demo</a>
@@ -45,11 +45,13 @@
 
 1. (Optional) Click on `Fork`
 2. Clone the project on your local machine : `git clone https://github.com/guilyx/gantt-trampoline.git`
-3. Install dependencies : `insert line to meet dependencies`
+3. Install dependencies : 
+* Follow the tutorial from `res/howto.pdf` to setup Trampoline and the Virtual Platform to test simple applications without hardware.
+* `pip install -r requirements.txt` from the repository's directory.
 
 ## Run
 
-<!--- how to run your app ? -->
+1. 
 
 ## Roadmap
 
