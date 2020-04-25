@@ -1,0 +1,32 @@
+
+{
+  "alarm" : [],
+  "event" : [],
+  "isr" : [],
+  "resource" : [],
+  "task" : 
+  [
+    
+    {
+      "ACTIVATION" : 1,
+      "AUTOSTART" : "true",
+      "AUTOSTART_S" : 
+      {
+        "APPMODE" : 
+        [
+          
+          {
+            "VALUE" : "AppStd"
+          }
+        ]
+      },
+      "KIND" : "Task",
+      "NAME" : "task1",
+      "NONPREEMPTABLE" : "false",
+      "PRIORITY" : 1,
+      "SCHEDULE" : "FULL",
+      "STACKSIZE" : 32768,
+      "USEINTERNALRESOURCE" : "false"
+    }
+  ]
+}
