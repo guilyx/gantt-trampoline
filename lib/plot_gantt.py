@@ -24,8 +24,8 @@ class GanttPlot():
             index += 3
 
         #Initiate labels
-        self.ylabels = [str(elem) for elem in range(ylim)]
-        self.gnt.set_yticks([elem[0]+1 for elem in self.available_y]) 
+        self.ylabels = [str(_) for _ in range(ylim)]
+        self.gnt.set_yticks([_[0]+1 for _ in self.available_y]) 
 
         self.numberTasks = 0
     

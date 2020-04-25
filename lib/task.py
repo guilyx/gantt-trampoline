@@ -9,13 +9,9 @@ from lib.plot_gantt import GanttPlot
 
 # A Task has an activation time, running periods and a termination time
 
-
-class ReadTrace():
-    def __init__(self):
-        pass
-
 # Tony Masters strikes again, this time it's only to check if tasks are scheduled correctly though...
 
+# To DO : Priorities
 
 class TaskMaster():
     def __init__(self):
@@ -23,52 +19,54 @@ class TaskMaster():
         self.tasks_n = 0
         self.conflicts = 0
         self.maxRunningTime = 0
+        self.timelineAvailability = [True for _ in range(0, 200)]
         self.lastTask = None
 
     def registerTask(self, task):
-        self.tasks[task.name] = task
-        self.tasks_n += 1
-        self.__newMaxRunningTime()
-        self.checkSchedule()
+        resolved = self.__checkConflicts(task)
+        if resolved:
+            self.__scheduleTask(task)
+            self.tasks[task.name] = task
+            self.tasks_n += 1
+            self.__newMaxRunningTime()
 
     def deleteTask(self, task):
         self.tasks.pop(task.name)
         self.tasks_n -= 1
         self.__newMaxRunningTime()
 
-    def checkSchedule(self):
-        tempDic = self.tasks.copy()
+    def __checkConflicts(self, task):
+        index_running = []
+        conflicts = 0
 
-        for tsk in self.tasks:
-            tempDic.pop(tsk)
-            activation_times = [
-                tempDic[elem].activationTime for elem in tempDic]
-            termination_times = [
-                tempDic[elem].terminationTime for elem in tempDic]
+        for elem in task.runningPeriods:
+            for index_ in range(elem[0], elem[0] + elem[1]):
+                index_running.append(index_)
 
-            for period in self.tasks[tsk].runningPeriods:
-                # This only check if activation and termination occur during another task's execution
-                if ((any(activation_times) > period[0] and
-                     any(activation_times) < (period[0] + period[1])) or
-                    (any(termination_times) > period[0] and
-                     any(termination_times) < (period[0] + period[1]))):
-                    print("This task encountered an issue : ")
-                    self.tasks[tsk].__str__()
-                    self.conflicts += 1
-                    
-                # Now checking if any range(start, stop) of each period are superposed
-                if True:
-                    pass
-
-        if self.conflicts > 0:
-            print("Found ", self.conflicts, " conflicts in the schedule...")
+        for index in index_running:
+            if self.timelineAvailability[index] == False:
+                conflicts += 1
+        
+        if conflicts:
+            print("Conflicts when scheduling task == ", task.name, "== not scheduling it !")
+            return False
+        else: 
+            return True
 
     def __newMaxRunningTime(self):
         lastTaskKey = max(
             self.tasks, key=lambda o: self.tasks[o].terminationTime)
         self.lastTask = self.tasks[lastTaskKey]
         self.maxRunningTime = self.lastTask.terminationTime
-
+    
+    def __scheduleTask(self, task):
+        index_used = []
+        for elem in task.runningPeriods:
+            for index_ in range(elem[0], elem[0] + elem[1]):
+                index_used.append(index_)
+        for index in index_used:
+            self.timelineAvailability[index] = False
+            
     # ------------ # Graphic Methods # ---------------- #
 
     def plotGantt(self):
@@ -91,6 +89,7 @@ class Task():
         self.name = name
         self.activationTime = runningPeriods[0][0]
         self.runningPeriods = runningPeriods
+        self.periodActivations = [_[0] for _ in runningPeriods]
         self.terminationTime = runningPeriods[-1][0] + runningPeriods[-1][1]
 
     def __str__(self):
