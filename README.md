@@ -51,7 +51,24 @@
 
 ## Run
 
-1. 
+```shell
+$ python main.py -h
+usage: main.py [-h] [--tpl_path TPL_PATH] [--trace_path TRACE_PATH] use_trace
+
+Generate Gantt Diagrams from Real-Time process' traces.
+
+positional arguments:
+  use_trace             0 to build from scratch, 1 to use processes' trace
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --tpl_path TPL_PATH   Register the path to the tpl static info json file
+  --trace_path TRACE_PATH
+                        Register the path to the trace json file
+```
+
+1. Run using a Trace of tasks : `python main.py 1 --tpl_path TPL_PATH --trace_path TRACE_PATH` (by default the paths goes to generated files in data/)
+2. Run using your set of tasks : `python main.py 0`
 
 ## Roadmap
 
