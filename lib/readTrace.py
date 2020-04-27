@@ -50,6 +50,12 @@ class TraceGenerator():
         # track the running task (init to idle)
         runningTask = len(self.procNames)-1
 
+    def __getEventName(self, staticInfo, task, target, mask):
+        for taskEvt in staticInfo['task'][target]['EVENT']:
+            for evt in staticInfo['event']:
+                if evt['MASK'] == mask and taskEvt['VALUE'] == evt['NAME']:
+                    return evt['NAME']
+
     def printTrace(self):
         # ---------------------------------
         # Exploit the trace, chronologically
@@ -74,27 +80,24 @@ class TraceGenerator():
                     timeObjStates[int(elt['target_state'])]))
             elif elt['type'] == 'set_event':  # send event
                 target = int(elt['target_task_id'])
-                evtId = int(elt['event'])-1
-                evtName = self.staticInfo['task'][target]['EVENT'][evtId]['VALUE']
+                evtMask = int(elt['event'])
+                evtName = self.__getEventName(self.staticInfo, target, evtMask)
                 print('Event {0:>12} (id {1}) sent to task {2}'.format(
-                    evtName,
-                    int(elt['event']),
-                    self.procNames[target]))
+                    evtName, int(elt['event']), self.procNames[target]))
             elif elt['type'] == 'reset_event':  # reset event
-                target = runningTask
-                evtId = int(elt['event'])-1
-                evtName = self.staticInfo['task'][target]['EVENT'][evtId]['VALUE']
-                print('task {0:>20} resets event {1:>10} (id {2})'.format(
-                    self.procNames[i],
-                    evtName,
-                    int(elt['event'])))
+                target = int(elt['target_task_id'])
+                evtMask = int(elt['event'])
+                evtName = self.__getEventName(self.staticInfo, target, evtMask)
+                print('task {0:>20} (id {1}) resets event {1:>10} (mask {2})'.format(
+                    evtName, int(elt['event']), self.procNames[target]))
+
             else:
                 print('unhandled type: {0}'.format(elt['type']))
 
     def writeTrace(self, filename):
         path = '../data/' + filename
         self.deleteFile(path)
-        
+
         for elt in self.trace:
             data = {}
             if elt['type'] == 'proc':  # proc state udpdate
@@ -102,7 +105,8 @@ class TraceGenerator():
                 st = int(elt['target_state'])
 
                 data[elt['ts']] = {
-                    elt['type']: ('{0}, {1}'.format(self.procNames[i], self.taskStates[st]))
+                    elt['type']: ('{0}, {1}'.format(
+                        self.procNames[i], self.taskStates[st]))
                 }
                 if self.taskStates[st] == 'RUNNING':  # //change to running
                     runningTask = i
@@ -111,7 +115,8 @@ class TraceGenerator():
                 to = self.staticInfo['alarm'][i]
 
                 data[elt['ts']] = {
-                    elt['type']: ('time object expired: {0}'.format(to['NAME']))
+                    elt['type']: (
+                        'time object expired: {0}'.format(to['NAME']))
                 }
 
             elif elt['type'] == 'timeobj':  # alarm state update
@@ -125,8 +130,8 @@ class TraceGenerator():
 
             elif elt['type'] == 'set_event':  # send event
                 target = int(elt['target_task_id'])
-                evtId = int(elt['event'])-1
-                evtName = self.staticInfo['task'][target]['EVENT'][evtId]['VALUE']
+                evtMask = int(elt['event'])
+                evtName = self.__getEventName(self.staticInfo, target, evtMask)
 
                 data[elt['ts']] = {
                     elt['type']: ('Event {0:>12} (id {1}) sent to task {2}'.format(
@@ -136,10 +141,9 @@ class TraceGenerator():
                 }
 
             elif elt['type'] == 'reset_event':  # reset event
-                target = runningTask
-                evtId = int(elt['event'])-1
-                evtName = self.staticInfo['task'][target]['EVENT'][evtId]['VALUE']
-
+                target = int(elt['target_task_id'])
+                evtMask = int(elt['event'])
+                evtName = self.__getEventName(self.staticInfo, target, evtMask)
                 data[elt['ts']] = {
                     elt['type']: ('task {0:>20} resets event {1:>10} (id {2})'.format(
                         self.procNames[i],
@@ -151,7 +155,7 @@ class TraceGenerator():
                 data[elt['ts']] = {
                     elt['type']: 'unhandled type'
                 }
-        
+
             # Fills with new data
             with open(path, 'a') as outfile:
                 json.dump(data, outfile, indent=4)
@@ -162,6 +166,7 @@ class TraceGenerator():
             os.remove(path)
         except OSError as e:
             pass
+
 
 if __name__ == "__main__":
     rt = TraceGenerator()
