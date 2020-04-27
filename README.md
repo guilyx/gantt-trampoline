@@ -45,7 +45,9 @@
 
 1. (Optional) Click on `Fork`
 2. Clone the project on your local machine : `git clone https://github.com/guilyx/gantt-trampoline.git`
-3. Install dependencies : 
+3. Install requirements
+
+### Install dependencies : 
   - Clone Trampoline
     ```shell
     $ git clone https://github.com/TrampolineRTOS/trampoline.git
@@ -70,7 +72,7 @@
     $ sudo mv trampoline /opt
     note : assuming you are in the directory containing trampoline
     ```
-4. Testing :
+### Testing
   ```shell
   $ git clone https://github.com/TrampolineRTOS/Labs.git
   $ cd Labs/posix/labs/lab1
@@ -83,8 +85,9 @@
   $ ./lab1_exe
   Hello World
   ```
+### Issues 
 
-Note : The TrampolineRTOS posix installation steps were written by (Mikael Briday)[https://github.com/mbriday]
+If you have any trouble during the installation, refer to the detailed guide (here)[res/trampoline_installation.md] written by (Mikael Briday)[https://github.com/mbriday]
 
 If you arrived to the last step with the `Hello World` output, your installation is ready. (Press `q`  to quit the application, `ctrl+c` is not handled.)
 
