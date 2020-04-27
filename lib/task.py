@@ -19,6 +19,7 @@ DEFAULT_TASK_DURATION = 30
 class TaskMaster():
     def __init__(self):
         self.tasks = dict()
+        self.tasksRunningCounter = dict()
         self.tasks_n = 0
         self.conflicts = 0
         self.maxRunningTime = 0
@@ -91,8 +92,11 @@ class TaskMaster():
                 xlim += DEFAULT_TASK_DURATION
 
         gantt = GanttPlot(len(generator.procNames)*3, xlim)
-
         last_task = None
+
+        # Initiate running counter
+        for names in generator.procNames:
+            self.tasksRunningCounter[names] = 0
 
         for elt in generator.trace:
             if elt['type'] == 'proc':
@@ -108,9 +112,11 @@ class TaskMaster():
                     self.registerTask(task_, running=False)
                     gantt.terminateTask(task_)
                 elif state is 'RUNNING':
-                    # print('A task is running...')
+                    self.tasksRunningCounter[taskname] += 1
                     task_ = Task(taskname, [(self.maxRunningTime, DEFAULT_TASK_DURATION)])
                     self.registerTask(task_, running=True)
+                    if self.tasksRunningCounter[taskname] == 1:
+                        gantt.activateTask(task_)
                     gantt.addTask(task_)
                 elif state is 'WAITING':
                     pass
@@ -118,9 +124,12 @@ class TaskMaster():
                     pass
                 elif state is 'READY_AND_NEW':
                     # print('A task is ready..')
+
+                    '''
                     task_ = Task(taskname, [(self.maxRunningTime, DEFAULT_TASK_DURATION)])
                     self.registerTask(task_, running=False)
                     gantt.activateTask(task_)
+                    '''
 
             else:
                 print('Type from Trace not supported yet')
