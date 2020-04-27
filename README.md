@@ -3,6 +3,7 @@
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
+[![HitCount](http://hits.dwyl.com/guilyx/gantt-trampoline.svg)](http://hits.dwyl.com/guilyx/gantt-trampoline)
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
