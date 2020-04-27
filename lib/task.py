@@ -22,7 +22,7 @@ class TaskMaster():
         self.tasks_n = 0
         self.conflicts = 0
         self.maxRunningTime = 0
-        self.timelineAvailability = [True for _ in range(0, 500)]
+        self.timelineAvailability = [True for _ in range(0, 1000000)]
         self.lastTask = None
 
     def registerTask(self, task, running=True):
@@ -98,8 +98,10 @@ class TaskMaster():
             elif elt['type'] == 'reset_event':  # reset event
                 # handle resets events
                 pass
+        
 
         gantt = GanttPlot(len(generator.procNames)*3, xlim)
+        self.timelineAvailability = [True for _ in range(0, xlim)]
 
         last_task = None
 
@@ -130,9 +132,18 @@ class TaskMaster():
                     task_ = Task(taskname, [(self.maxRunningTime, DEFAULT_TASK_DURATION)])
                     self.registerTask(task_, running=False)
                     gantt.activateTask(task_)
+            
+            elif elt['type'] == 'set_event':
+                # Put event graphical interpretation here
+                pass
+        
+            elif elt['type'] == 'reset_event':
+                # Put event graphical interpretation here
+                pass
 
             else:
-                print('Type from Trace not supported yet')
+                #print('Type from Trace not supported yet')
+                pass
             
         gantt.show()
 

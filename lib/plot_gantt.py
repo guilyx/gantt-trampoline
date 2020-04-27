@@ -44,21 +44,31 @@ class GanttPlot():
             print("Warning : Tried to run a task that was not ready.")
 
     def activateTask(self, task):
-        y_index = self.available_y[self.numberTasks]
-
-        if self.numberTasks == int(self.ylim/3):
-            print(
-                'Task was not added, gantt diagram full. Extend ylim to add more tasks.')
-        else:
-            self.tasksColors[task.name] = np.random.rand(3,)
-            self.tasks[task.name] = task
+        if task.name in self.tasksYticks:
+            y_index = self.tasksYticks[task.name]
             self.tasks[task.name].ready = True
             self.tasksYticks[task.name] = y_index
             self.ylabels[self.numberTasks] = task.name
             self.gnt.set_yticklabels(labels=self.ylabels)
-            self.numberTasks += 1
             self.gnt.arrow(
                 task.activationTime, y_index[0]-0.2, 0, 2, color='red', width=1, head_width=0.6)
+
+        else:
+            y_index = self.available_y[self.numberTasks]
+
+            if self.numberTasks == int(self.ylim/3):
+                print(
+                    'Task was not added, gantt diagram full. Extend ylim to add more tasks.')
+            else:
+                self.tasksColors[task.name] = np.random.rand(3,)
+                self.tasks[task.name] = task
+                self.tasks[task.name].ready = True
+                self.tasksYticks[task.name] = y_index
+                self.ylabels[self.numberTasks] = task.name
+                self.gnt.set_yticklabels(labels=self.ylabels)
+                self.numberTasks += 1
+                self.gnt.arrow(
+                    task.activationTime, y_index[0]-0.2, 0, 2, color='red', width=1, head_width=0.6)
 
     def terminateTask(self, task):
         y_index = self.tasksYticks[task.name]
