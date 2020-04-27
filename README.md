@@ -73,24 +73,24 @@
     note : assuming you are in the directory containing trampoline
     ```
 ### Testing
-  ```shell
-  $ git clone https://github.com/TrampolineRTOS/Labs.git
-  $ cd Labs/posix/labs/lab1
-  $ goil --target=posix --templates=/opt/trampoline/goil/templates/ lab1.oil
-  ...
-  No warning, no error.
-  $ ./make.py
-  ...
-  [100%] Linking lab1_exe
-  $ ./lab1_exe
-  Hello World
-  ```
+  - Use the ECN Scheduling Labs
+    ```shell
+    $ git clone https://github.com/TrampolineRTOS/Labs.git
+    $ cd Labs/posix/labs/lab1
+    $ goil --target=posix --templates=/opt/trampoline/goil/templates/ lab1.oil
+    ...
+    No warning, no error.
+    $ ./make.py
+    ...
+    [100%] Linking lab1_exe
+    $ ./lab1_exe
+    Hello World
+    ```
 ### Issues 
 
 If you have any trouble during the installation, refer to the detailed guide (here)[res/trampoline_installation.md] written by (Mikael Briday)[https://github.com/mbriday]
 
 If you arrived to the last step with the `Hello World` output, your installation is ready. (Press `q`  to quit the application, `ctrl+c` is not handled.)
-
 
 5. Install python dependencies with `pip install -r requirements.txt` from the repository's directory.
 
