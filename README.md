@@ -88,7 +88,7 @@
     ```
 ### Issues 
 
-If you have any trouble during the installation, refer to the detailed guide (here)[res/trampoline_installation.md] written by (Mikael Briday)[https://github.com/mbriday]
+If you have any trouble during the installation, refer to the detailed guide [here](res/trampoline_installation.md) written by [Mikael Briday](https://github.com/mbriday)
 
 If you arrived to the last step with the `Hello World` output, your installation is ready. (Press `q`  to quit the application, `ctrl+c` is not handled.)
 
