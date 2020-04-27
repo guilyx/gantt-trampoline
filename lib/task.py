@@ -86,9 +86,18 @@ class TaskMaster():
 
         xlim = 0
         for elt in generator.trace:
-            state = generator.taskStates[int(elt['target_state'])]
-            if state is 'RUNNING':
-                xlim += DEFAULT_TASK_DURATION
+            if elt['type'] == 'proc':
+                state = generator.taskStates[int(elt['target_state'])]
+                if state is 'RUNNING':
+                    xlim += DEFAULT_TASK_DURATION
+            
+            elif elt['type'] == 'set_event':  # send event
+                # handle set events
+                pass
+
+            elif elt['type'] == 'reset_event':  # reset event
+                # handle resets events
+                pass
 
         gantt = GanttPlot(len(generator.procNames)*3, xlim)
 
