@@ -46,8 +46,48 @@
 1. (Optional) Click on `Fork`
 2. Clone the project on your local machine : `git clone https://github.com/guilyx/gantt-trampoline.git`
 3. Install dependencies : 
-* Follow the tutorial from `res/howto.pdf` to setup Trampoline and the Virtual Platform to test simple applications without hardware.
-* `pip install -r requirements.txt` from the repository's directory.
+  - Clone Trampoline
+    ```shell
+    $ git clone https://github.com/TrampolineRTOS/trampoline.git
+    $ git checkout -b trace origin/trace
+    ```
+  - Goil 
+    ```shell
+    $ cd trampoline/goil/makefile-unix
+    $ ./build/release.py
+    $ sudo cp goil /usr/local/bin
+    ```
+  - Viper
+    ```shell
+    $ cd ../../viper
+    $ make
+    $ export VIPER_PATH=/opt/trampoline/viper
+    $ echo 'export VIPER_PATH=/opt/trampoline/viper' >> ~/.bashrc
+    note : if you use zsh replace bashrc by zshrc
+    ```
+  - Installing TrampolineRTOS
+    ```shell
+    $ sudo mv trampoline /opt
+    note : assuming you are in the directory containing trampoline
+    ```
+4. Testing :
+  ```shell
+  $ git clone https://github.com/TrampolineRTOS/Labs.git
+  $ cd Labs/posix/labs/lab1
+  $ goil --target=posix --templates=/opt/trampoline/goil/templates/ lab1.oil
+  ...
+  No warning, no error.
+  $ ./make.py
+  ...
+  [100%] Linking lab1_exe
+  $ ./lab1_exe
+  Hello World
+  ```
+
+If you arrived to the last step with the `Hello World` output, your installation is ready. (Press `q`  to quit the application, `ctrl+c` is not handled.)
+
+
+5. Install python dependencies with `pip install -r requirements.txt` from the repository's directory.
 
 ## Run
 
