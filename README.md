@@ -84,7 +84,7 @@
   Hello World
   ```
 
-Note : The TrampolineRTOS posix installation steps were written by (Mikael Briday)[https://github.com/mbriday]
+Note : The TrampolineRTOS posix installation steps were written by [Mikael Briday](https://github.com/mbriday)
 
 If you arrived to the last step with the `Hello World` output, your installation is ready. (Press `q`  to quit the application, `ctrl+c` is not handled.)
 
