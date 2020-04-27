@@ -11,7 +11,6 @@ if __name__ == "__main__":
     parser.add_argument('--tpl_path', type=str, default='data/tpl_static_info.json', help="Register the path to the tpl static info json file")
     parser.add_argument('--trace_path', type=str, default='data/trace.json', help="Register the path to the trace json file")
     args = parser.parse_args()
-    print(args)
     sched = TaskMaster()
     if args.use_trace == True:
         sched.generateGanttFromJson(args.tpl_path, args.trace_path)
