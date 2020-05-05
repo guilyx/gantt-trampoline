@@ -184,7 +184,7 @@ class Task():
     def __str__(self):
         data = {
             "Name": self.name,
-            "Priority": self.priority
+            "Priority": self.priority,
             "ActivationTime": self.activationTime,
             "RunningPeriods": self.runningPeriods,
             "TerminationTime": self.terminationTime
