@@ -167,8 +167,9 @@ class TaskMaster():
 
 
 class Task():
-    def __init__(self, name, runningPeriods):
+    def __init__(self, name, priority, runningPeriods):
         self.name = name
+        self.priority = priority
         self.activationTime = runningPeriods[0][0]
         self.runningPeriods = runningPeriods
         self.periodActivations = [_[0] for _ in runningPeriods]
@@ -183,6 +184,7 @@ class Task():
     def __str__(self):
         data = {
             "Name": self.name,
+            "Priority": self.priority
             "ActivationTime": self.activationTime,
             "RunningPeriods": self.runningPeriods,
             "TerminationTime": self.terminationTime
