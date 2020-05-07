@@ -43,6 +43,17 @@
 
 [TrampolineRTOS](https://github.com/TrampolineRTOS/trampoline) is a RTOS built by academia in Nantes, France. Every RT applications you built leaves a trace with the tasks and events states at time t. The goal is to generate Gantt Plots from this trace.
 
+This project will allow you to plot you real-time jobs with a Gantt Diagram for :
+
+- Already defined periods
+- Trampoline posix's traces
+- Tasks sets with defined Computation Times, Periods and Deadlines and a chosen algorithms (Rate Monotonic, Deadline Monotonic... )
+
+<p align="center">
+    <!--- relative path means image/image.png instead of https://etc... -->
+    <img src="img/rmsched" width="580" height="463">                           
+</a>
+
 ## Setup
 
 1. (Optional) Click on `Fork`
@@ -105,7 +116,7 @@ usage: main.py [-h] [--tpl_path TPL_PATH] [--trace_path TRACE_PATH] use_trace
 Generate Gantt Diagrams from Real-Time process' traces.
 
 positional arguments:
-  use_trace             0 to build from scratch, 1 to use processes' trace
+  use_trace             0 to build from scratch, 1 to use scheduling algorithms, 2 to use processes' trace
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -114,8 +125,9 @@ optional arguments:
                         Register the path to the trace json file
 ```
 
-1. Run using a Trace of tasks : `python main.py 1 --tpl_path TPL_PATH --trace_path TRACE_PATH` (by default the paths goes to generated files in data/)
-2. Run using your set of tasks : `python main.py 0`
+1. Run using a Trace of tasks : `python main.py 2 --tpl_path TPL_PATH --trace_path TRACE_PATH` (by default the paths goes to generated files in data/)
+2. Run using your set of tasks with hardcoded periods : `python main.py 0`
+3. [NEW] Run using your set of tasks with scheduling algorithms : `python main.py 1`
 
 ## Roadmap
 

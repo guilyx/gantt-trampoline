@@ -4,7 +4,7 @@ import numpy as np
 
 
 class GanttPlot():
-    def __init__(self, ylim, xlim):
+    def __init__(self, ylim, xlim, title=None):
         self.fig, self.gnt = plt.subplots(figsize=(12, 8))
         self.gnt.set_ylim(0, ylim+1)
         self.gnt.set_xlim(-1, xlim+1)
@@ -20,6 +20,9 @@ class GanttPlot():
 
         # Setting graph attribute
         self.gnt.grid(True)
+
+        if title:
+            self.gnt.set_title(title)
 
         # Define available y position
         self.available_y = []

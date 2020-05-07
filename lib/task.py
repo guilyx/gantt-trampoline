@@ -272,7 +272,7 @@ class JobScheduler():
         pass
 
     def __plotRM(self, job):
-        gnt = GanttPlot(3*len(self.tasks), self.hyperperiod)
+        gnt = GanttPlot(3*len(self.tasks), self.hyperperiod, "Rate Monotonic Schedule")
         availability = [True for _ in range(self.hyperperiod)]
         arrows_n = dict()
         reverse_arrows_n = dict()
