@@ -194,7 +194,6 @@ class TaskMaster():
         for elem in self.tasks:
             self.tasks[elem].__str__()
 
-
 class AutomaticTask():
     def __init__(self, name, offset, period, wcet, deadline):
         self.name = name
@@ -215,7 +214,6 @@ class AutomaticTask():
             "Deadline": self.deadline
         }
         print(data)
-
 
 class JobScheduler():
     def __init__(self):
