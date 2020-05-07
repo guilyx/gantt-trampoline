@@ -42,7 +42,7 @@ class TaskMaster():
         if task.name in self.tasks:
             self.tasks.pop(task.name)
             self.tasks_n -= 1
-            if len(list(self.tasks)) is not 0:
+            if self.task_n != 0:
                 self.__newMaxRunningTime()
 
     def __resolveConflicts(self, task, running_, conflicts):

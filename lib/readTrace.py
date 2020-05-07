@@ -125,7 +125,7 @@ class TraceGenerator():
                 data[elt['ts']] = {
                     elt['type']: ('time object "{0:>11}" change to state {1}'.format(
                         to['NAME'],
-                        timeObjStates[int(elt['target_state'])]))
+                        self.timeObjStates[int(elt['target_state'])]))
                 }
 
             elif elt['type'] == 'set_event':  # send event
