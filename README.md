@@ -116,7 +116,7 @@ usage: main.py [-h] [--tpl_path TPL_PATH] [--trace_path TRACE_PATH] use_trace
 Generate Gantt Diagrams from Real-Time process' traces.
 
 positional arguments:
-  use_trace             0 to build from scratch, 1 to use scheduling algorithms, 2 to use processes' trace
+  mode             0 to build from scratch, 1 to use scheduling algorithms, 2 to use processes' trace
 
 optional arguments:
   -h, --help            show this help message and exit
