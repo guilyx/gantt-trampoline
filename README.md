@@ -51,7 +51,7 @@ This project will allow you to plot you real-time jobs with a Gantt Diagram for 
 
 <p align="center">
     <!--- relative path means image/image.png instead of https://etc... -->
-    <img src="img/rmsched" width="580" height="463">                           
+    <img src="img/rmsched.png" width="580" height="463">                           
 </a>
 
 ## Setup
