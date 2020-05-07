@@ -1,7 +1,7 @@
 import sys
 from os import path
 sys.path.append( path.dirname( path.dirname( path.abspath(__file__) ) ) )
-from lib.task import Task
+from lib.task import ManualTask
 from lib.task import TaskMaster
 import random
 
@@ -12,7 +12,7 @@ def test_register():
     t = []
     for i in range(n):
         init_name = init_name + '|'
-        t.append(Task(init_name, [(i, 1)]))
+        t.append(ManualTask(init_name, [(i, 1)]))
         sched.registerTask(t[i])
     
     assert(sched.tasks_n == n)
@@ -23,7 +23,7 @@ def test_register_trick():
     n = 100
     t = []
     for i in range(n):
-        t.append(Task(init_name, [(i, 1)]))
+        t.append(ManualTask(init_name, [(i, 1)]))
         sched.registerTask(t[i])
     
     assert(sched.tasks_n == 1)
@@ -35,7 +35,7 @@ def test_removal():
     t = []
     for i in range(n):
         init_name = init_name + '|'
-        t.append(Task(init_name, [(i, 1)]))
+        t.append(ManualTask(init_name, [(i, 1)]))
         sched.registerTask(t[i])
 
     l = 40
@@ -52,7 +52,7 @@ def test_removal_trick():
     n = 100
     t = []
     for i in range(n):
-        t.append(Task(init_name, [(i, 1)]))
+        t.append(ManualTask(init_name, [(i, 1)]))
         sched.registerTask(t[i])
 
     l = 40
