@@ -31,7 +31,7 @@ if __name__ == "__main__":
     elif args.mode == 1:
         sched = JobScheduler()
     
-        t1 = AutomaticTask('t1', 0, 2, 6, 6)
+        t1 = AutomaticTask('t1', 0, 1, 4, 6)
         t2 = AutomaticTask('t2', 0, 2, 8, 8)
         t3 = AutomaticTask('t3', 0, 2, 12, 12)
 
@@ -39,6 +39,11 @@ if __name__ == "__main__":
 
         for t in ts: 
             sched.registerTask(t) 
-        
-        sched.schedRateMonotonic()
+
+        x = input("Rate Monotinic : 1 ; Deadline Monotonic : 2 ---> ")
+
+        if x == '1':
+            sched.schedRateMonotonic()
+        elif x == '2':
+            sched.schedDeadlineMonotonic()
 
