@@ -34,6 +34,24 @@ def test_removal():
     n = 100
     t = []
     for i in range(n):
+        init_name = init_name + '|'
+        t.append(Task(init_name, [(i, 1)]))
+        sched.registerTask(t[i])
+
+    l = 40
+    for i in range(l):
+        sel = random.choice(t)
+        sched.deleteTask(sel)
+        t.remove(sel)
+    
+    assert(sched.tasks_n == n-l)
+
+def test_removal_trick():
+    sched = TaskMaster()
+    init_name = '_'
+    n = 100
+    t = []
+    for i in range(n):
         t.append(Task(init_name, [(i, 1)]))
         sched.registerTask(t[i])
 
@@ -41,4 +59,4 @@ def test_removal():
     for i in range(l):
         sched.deleteTask(random.choice(t))
     
-    assert(sched.tasks_n == (n-l))
+    assert(sched.tasks_n == 0)

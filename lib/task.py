@@ -39,9 +39,11 @@ class TaskMaster():
             self.__newMaxRunningTime()
 
     def deleteTask(self, task):
-        self.tasks.pop(task.name)
-        self.tasks_n -= 1
-        self.__newMaxRunningTime()
+        if task.name in self.tasks:
+            self.tasks.pop(task.name)
+            self.tasks_n -= 1
+            if len(list(self.tasks)) is not 0:
+                self.__newMaxRunningTime()
 
     def __resolveConflicts(self, task, running_, conflicts):
         # resolve conflicts if any
