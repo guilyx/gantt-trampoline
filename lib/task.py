@@ -39,9 +39,11 @@ class TaskMaster():
             self.__newMaxRunningTime()
 
     def deleteTask(self, task):
-        self.tasks.pop(task.name)
-        self.tasks_n -= 1
-        self.__newMaxRunningTime()
+        if task.name in self.tasks:
+            self.tasks.pop(task.name)
+            self.tasks_n -= 1
+            if self.tasks_n != 0:
+                self.__newMaxRunningTime()
 
     def __resolveConflicts(self, task, running_, conflicts):
         # resolve conflicts if any
@@ -88,7 +90,7 @@ class TaskMaster():
         for elt in generator.trace:
             if elt['type'] == 'proc':
                 state = generator.taskStates[int(elt['target_state'])]
-                if state is 'RUNNING':
+                if state == 'RUNNING':
                     xlim += DEFAULT_TASK_DURATION
             
             elif elt['type'] == 'set_event':  # send event
@@ -111,23 +113,23 @@ class TaskMaster():
                 start_time = elt['ts']
                 taskname = generator.procNames[int(elt['proc_id'])]
                 state = generator.taskStates[int(elt['target_state'])]
-                if state is 'READY':
+                if state == 'READY':
                     pass
-                elif state is 'SUSPENDED':
+                elif state == 'SUSPENDED':
                     # print('A task has been terminated...')
                     task_ = Task(taskname, [(self.maxRunningTime, 0)])
                     self.registerTask(task_, running=False)
                     gantt.terminateTask(task_)
-                elif state is 'RUNNING':
+                elif state == 'RUNNING':
                     # print('A task is running...')
                     task_ = Task(taskname, [(self.maxRunningTime, DEFAULT_TASK_DURATION)])
                     self.registerTask(task_, running=True)
                     gantt.addTask(task_)
-                elif state is 'WAITING':
+                elif state == 'WAITING':
                     pass
-                elif state is 'AUTOSTART':
+                elif state == 'AUTOSTART':
                     pass
-                elif state is 'READY_AND_NEW':
+                elif state == 'READY_AND_NEW':
                     # print('A task is ready..')
                     task_ = Task(taskname, [(self.maxRunningTime, DEFAULT_TASK_DURATION)])
                     self.registerTask(task_, running=False)
