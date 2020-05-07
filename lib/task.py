@@ -7,6 +7,7 @@ __brief__  : ManualTask classes
 import json
 import sys
 import numpy as np
+from math import gcd
 from lib.plot_gantt import GanttPlot
 from lib.readTrace import TraceGenerator
 
@@ -201,13 +202,69 @@ class AutomaticTask():
         self.period = period
         self.wcet = wcet
         self.deadline = deadline
+    
+    def setUtilizationFactor(self, ui):
+        self.ui = ui
 
     def __str__(self):
         data = {
             "Name": self.name,
             "Offset": self.offset,
             "Period": self.period,
-            "WCET": self.wcet,
+            "Computation": self.computation,
             "Deadline": self.deadline
         }
         print(data)
+
+
+class JobScheduler():
+    def __init__(self):
+        self.algorithms = {
+            "RateMonotonic": self.rate_monotonic,
+            "DeadlineMonotonic": self.deadline_monotonic
+        }
+        self.tasks = dict()
+        self.feasible = True
+
+    def registerTask(self, task):
+        if task.name not in self.tasks:
+                self.tasks[task.name] = task
+                self.tasks_n += 1
+        else:
+            print("Tried to add the same task twice.")
+        
+    def removeTask(self, task):
+        if task.name not in self.tasks:
+            print("Tried to remove a task that was not added.")
+        else:
+            self.task.pop(task.name)
+    
+    def check_feasibility(self):
+        u = 0
+        for t in self.tasks:
+            ui = self.tasks[t].computation/self.tasks[t].period
+            self.tasks[t].setUtilizationFactor(ui)
+            u += ui
+        
+        if u > 1:
+            print("The Job is not feasible.")
+            self.feasible = False
+    
+    def schedRateMonotonic(self):
+        pass
+
+    def schedDeadlineMonotonic(self):
+        pass
+
+    def __checkRM(self):
+        pass
+
+    def __checkDM(self):
+        pass
+
+    def __calcLCM(self):
+        period_list = [self.tasks[t].period for t in self.tasks]
+        lcm = period_list[0]
+        for elem in period_list[1:]:
+            lcm = lcm*elem/gcd(lcm, elem)
+        self.hyperperiod = lcm
