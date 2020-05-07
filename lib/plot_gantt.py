@@ -6,9 +6,10 @@ import numpy as np
 class GanttPlot():
     def __init__(self, ylim, xlim):
         self.fig, self.gnt = plt.subplots(figsize=(12, 8))
-        self.gnt.set_ylim(0, ylim)
-        self.gnt.set_xlim(0, xlim)
+        self.gnt.set_ylim(0, ylim+1)
+        self.gnt.set_xlim(-1, xlim+1)
         self.ylim = ylim
+        self.xlim = xlim
         self.tasksYticks = {}
         self.tasksColors = {}
         self.tasks = {}
@@ -32,6 +33,60 @@ class GanttPlot():
         self.gnt.set_yticks([_[0]+1 for _ in self.available_y])
 
         self.numberTasks = 0
+
+    def plotArrow(self, task, x):
+        if task.name in self.tasksYticks:
+            y_index = self.tasksYticks[task.name]
+            self.tasksYticks[task.name] = y_index
+            self.ylabels[self.numberTasks] = task.name
+            self.gnt.set_yticklabels(labels=self.ylabels)
+            self.gnt.arrow(
+                x, y_index[0]-0.2, 0, 2, color='red', width=0.2, head_width=0.6)
+        else:
+            y_index = self.available_y[self.numberTasks]
+            if self.numberTasks >= int(self.ylim/3):
+                print(
+                    'Task was not added, gantt diagram full. Extend ylim to add more tasks.')
+            else:
+                self.tasksColors[task.name] = np.random.rand(3,)
+                self.tasks[task.name] = task.name
+                self.tasksYticks[task.name] = y_index
+                self.ylabels[self.numberTasks] = task.name
+                self.gnt.set_yticklabels(labels=self.ylabels)
+                self.numberTasks += 1
+                self.gnt.arrow(
+                    x, y_index[0]-0.2, 0, 2, color='red', width=0.2, head_width=0.6)
+    
+    def plotReverseArrow(self, task, x):
+        if task.name in self.tasksYticks:
+            y_index = self.tasksYticks[task.name]
+            self.tasksYticks[task.name] = y_index
+            self.ylabels[self.numberTasks] = task.name
+            self.gnt.set_yticklabels(labels=self.ylabels)
+            self.gnt.arrow(
+                x, 2.2+y_index[0], 0, -2, color='red', width=0.2, head_width=0.6)
+        else:
+            y_index = self.available_y[self.numberTasks]
+            if self.numberTasks >= int(self.ylim/3):
+                print(
+                    'Task was not added, gantt diagram full. Extend ylim to add more tasks.')
+            else:
+                self.tasksColors[task.name] = np.random.rand(3,)
+                self.tasks[task.name] = task.name
+                self.tasksYticks[task.name] = y_index
+                self.ylabels[self.numberTasks] = task.name
+                self.gnt.set_yticklabels(labels=self.ylabels)
+                self.numberTasks += 1
+                self.gnt.arrow(
+                    x, y_index[0]+2.2, 0, -2, color='red', width=0.2, head_width=0.6)
+    
+    def plotAutoTask(self, task, periods):
+        # print(self.tasksYticks[task.name])
+        if task.name in self.tasksYticks:
+            self.gnt.broken_barh(
+                periods, self.tasksYticks[task.name], facecolor=self.tasksColors[task.name])
+        else:
+            print("Warning : Tried to run a task that was not ready.")
 
     def addTask(self, task):
         # print(self.tasksYticks[task.name])
