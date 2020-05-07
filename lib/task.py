@@ -197,11 +197,11 @@ class TaskMaster():
             self.tasks[elem].__str__()
 
 class AutomaticTask():
-    def __init__(self, name, offset, period, wcet, deadline):
+    def __init__(self, name, offset, computation, period, deadline):
         self.name = name
         self.offset = offset
         self.period = period
-        self.wcet = wcet
+        self.computation = computation
         self.deadline = deadline
     
     def setUtilizationFactor(self, ui):
@@ -220,16 +220,14 @@ class AutomaticTask():
 class JobScheduler():
     def __init__(self):
         self.algorithms = {
-            "RateMonotonic": self.rate_monotonic,
-            "DeadlineMonotonic": self.deadline_monotonic
+            "RateMonotonic": self.schedRateMonotonic,
+            "DeadlineMonotonic": self.schedDeadlineMonotonic
         }
         self.tasks = dict()
-        self.feasible = True
 
     def registerTask(self, task):
         if task.name not in self.tasks:
                 self.tasks[task.name] = task
-                self.tasks_n += 1
         else:
             print("Tried to add the same task twice.")
         
@@ -246,18 +244,93 @@ class JobScheduler():
             self.tasks[t].setUtilizationFactor(ui)
             u += ui
         
+        self.utilization_factor = u
         if u > 1:
             print("The Job is not feasible.")
-            self.feasible = False
+            return(False)
+        else:
+            return(True)
     
-    def schedRateMonotonic(self):
-        pass
+    def schedRateMonotonic(self, plot=True):
+        feasible = self.check_feasibility()
+        self.__calcLCM()
+        if feasible:
+            self.__checkRM()
+            if not self.rm_schedulable:
+                pass
+            else:
+                ranked_tasks = []
+                temp_tasks = self.tasks.copy()
+                for t in self.tasks:
+                    highest_p = min(temp_tasks, key=lambda o: temp_tasks[o].period)
+                    ranked_tasks.append(temp_tasks[highest_p])
+                    del temp_tasks[highest_p]
+                if plot:
+                    self.__plotRM(ranked_tasks)
 
     def schedDeadlineMonotonic(self):
         pass
 
+    def __plotRM(self, job):
+        gnt = GanttPlot(3*len(self.tasks), self.hyperperiod)
+        availability = [True for _ in range(self.hyperperiod)]
+        arrows_n = dict()
+        reverse_arrows_n = dict()
+        for t in job:
+            arrows_n[t.name] = [i*t.period for i in range(gnt.xlim//t.period + 1)]
+            reverse_arrows_n[t.name] = [i*t.deadline for i in range(1, gnt.xlim//t.period + 1)]
+            for elem in arrows_n[t.name]:
+                gnt.plotArrow(t, elem)
+            for elem in reverse_arrows_n[t.name]:
+                gnt.plotReverseArrow(t, elem)
+
+            for elem in arrows_n[t.name]:
+                ok = False
+                if elem == arrows_n[t.name][-1]:
+                    continue
+                for i in range(self.hyperperiod):
+                    if availability[elem + i] == True:
+                        for j in range(t.computation):
+                            if availability[elem + i + j] == True:
+                                ok = True
+                            else:
+                                ok = False
+                        
+                        if ok is True:
+                            for j in range(t.computation):
+                                availability[elem + i + j] = False
+                            break
+                gnt.plotAutoTask(t, [(elem + i + j - 1, t.computation)])
+         
+        gnt.show()
+
     def __checkRM(self):
-        pass
+        self.rm_optimal = True
+        self.rm_schedulable = True
+        offsets = [self.tasks[t].offset for t in self.tasks]
+        computations = [self.tasks[t].computation for t in self.tasks]
+        periods = [self.tasks[t].period for t in self.tasks]
+        deadlines = [self.tasks[t].deadline for t in self.tasks]
+        uis = [self.tasks[t].ui for t in self.tasks]
+
+        # all tasks are synchronous
+        if any(offsets) != 0:
+            self.rm_optimal = False
+        if deadlines != periods:
+            self.rm_optimal = False
+
+        ll73 = len(self.tasks)*(2**(1/len(self.tasks)) - 1)
+        if self.utilization_factor <= ll73:
+            self.rm_schedulable = True
+        
+        if sum(uis) + 1 <= 2:
+            self.rm_schedulable = True
+        
+        if self.rm_schedulable and not(self.rm_optimal):
+            print("Rate Monotonic not optimal, do you want to use another algorithm ? --> ")
+        
+        elif not(self.rm_schedulable):
+            print("Rate Monotonic not schedulable, do you want to use another algorithm ? --> ")
 
     def __checkDM(self):
         pass
@@ -266,5 +339,5 @@ class JobScheduler():
         period_list = [self.tasks[t].period for t in self.tasks]
         lcm = period_list[0]
         for elem in period_list[1:]:
-            lcm = lcm*elem/gcd(lcm, elem)
+            lcm = lcm*elem//gcd(lcm, elem)
         self.hyperperiod = lcm
