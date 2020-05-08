@@ -197,6 +197,11 @@ class TaskMaster():
             self.tasks[elem].__str__()
 
 class AutomaticTask():
+    '''
+    |-------| - Earliest deadline first 
+    | TO DO | - Least slack time
+    |-------| - ...
+    '''
     def __init__(self, name, offset, computation, period, deadline):
         self.name = name
         self.offset = offset
@@ -246,6 +251,7 @@ class JobScheduler():
         
         self.utilization_factor = u
         if u > 1:
+            print("Utilization = ", u)
             print("The Job is not feasible.")
             return(False)
         else:
@@ -314,7 +320,8 @@ class JobScheduler():
                             for j in range(t.computation):
                                 availability[elem + i + j] = False
                             break
-                gnt.plotAutoTask(t, [(elem + i + j, t.computation)])
+                if ok is True:
+                    gnt.plotAutoTask(t, [(elem + i, t.computation)])
          
         gnt.show()
 
@@ -347,7 +354,8 @@ class JobScheduler():
                             for j in range(t.computation):
                                 availability[elem + i + j] = False
                             break
-                gnt.plotAutoTask(t, [(elem + i + j, t.computation)])
+                if ok is True:
+                    gnt.plotAutoTask(t, [(elem + i, t.computation)])
          
         gnt.show()
 
