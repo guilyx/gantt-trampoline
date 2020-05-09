@@ -33,12 +33,17 @@ if __name__ == "__main__":
     
         t1 = AutomaticTask('t1', 0, 2, 6, 6)
         t2 = AutomaticTask('t2', 0, 2, 8, 8)
-        t3 = AutomaticTask('t3', 0, 2, 12, 8)
+        t3 = AutomaticTask('t3', 0, 1, 8, 2)
 
         ts = [t1, t2, t3]
 
         for t in ts: 
             sched.registerTask(t) 
-        
-        sched.schedRateMonotonic()
+
+        x = input("Rate Monotinic : 1 ; Deadline Monotonic : 2 ---> ")
+
+        if x == '1':
+            sched.schedRateMonotonic()
+        elif x == '2':
+            sched.schedDeadlineMonotonic()
 
