@@ -33,7 +33,7 @@ if __name__ == "__main__":
     
         t1 = AutomaticTask('t1', 0, 2, 6, 6)
         t2 = AutomaticTask('t2', 0, 2, 8, 8)
-        t3 = AutomaticTask('t3', 0, 2, 12, 12)
+        t3 = AutomaticTask('t3', 0, 2, 12, 8)
 
         ts = [t1, t2, t3]
 
