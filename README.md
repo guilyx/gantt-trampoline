@@ -135,7 +135,7 @@ See the [open issues](https://github.com/guilyx/gantt-trampoline/issues) for a l
 
 ## Contribute
 
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**. (please help)
 
 ### Contribute on proposed features
 
