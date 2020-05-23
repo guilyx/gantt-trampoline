@@ -19,6 +19,7 @@ jobs:
         python -m pip install -r requirements.txt
     - name: Install Trampoline
       run: |
+        cd
         git clone https://github.com/TrampolineRTOS/trampoline.git
         cd trampoline
         git checkout -b trace origin/trace
