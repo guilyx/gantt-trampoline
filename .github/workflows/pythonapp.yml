@@ -13,10 +13,24 @@ jobs:
       uses: actions/setup-python@v1
       with:
         python-version: 3.7
-    - name: Install dependencies
+    - name: Install Python dependencies
       run: |
         python -m pip install --upgrade pip
         python -m pip install -r requirements.txt
+    - name: Install Trampoline
+      run: |
+        git clone https://github.com/TrampolineRTOS/trampoline.git
+        cd trampoline
+        git checkout -b trace origin/trace
+        cd goil/makefile-unix/
+        ./build+release.py
+        sudo cp goil /usr/local/bin
+        cd ../../viper
+        make
+        export VIPER_PATH=/opt/trampoline/viper
+        echo 'export VIPER_PATH=/opt/trampoline/viper' >> ~/.bashrc
+        cd
+        sudo mv trampoline /opt
     - name: Lint with flake8
       run: |
         pip install flake8
