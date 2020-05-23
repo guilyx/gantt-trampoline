@@ -9,7 +9,6 @@ import sys
 import numpy as np
 from math import gcd
 from lib.GanttPlot import GanttPlot
-from lib.readTrace import TraceGenerator
 from lib.Trace import TraceToolbox
 import os
 
