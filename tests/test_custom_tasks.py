@@ -1,8 +1,8 @@
 import sys
 from os import path
 sys.path.append( path.dirname( path.dirname( path.abspath(__file__) ) ) )
-from lib.task import ManualTask
-from lib.task import TaskMaster
+from lib.Tasks import ManualTask
+from lib.Tasks import TaskMaster
 import random
 
 def test_register():

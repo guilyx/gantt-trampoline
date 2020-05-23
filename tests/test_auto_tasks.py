@@ -1,8 +1,8 @@
 import sys
 from os import path
 sys.path.append( path.dirname( path.dirname( path.abspath(__file__) ) ) )
-from lib.task import JobScheduler
-from lib.task import AutomaticTask
+from lib.Tasks import JobScheduler
+from lib.Tasks import AutomaticTask
 import random
 
 def test_feasible():
