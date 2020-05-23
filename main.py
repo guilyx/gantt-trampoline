@@ -1,4 +1,4 @@
-from lib.task import *
+from lib.Tasks import AutomaticTask, TaskMaster, JobScheduler, ManualTask
 import argparse
 
 def main():
@@ -13,7 +13,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     sched = TaskMaster()
     if args.mode == 2:
-        sched.generateGanttFromJson(args.tpl_path, args.trace_path)
+        sched.generate_gantt_from_trace(args.tpl_path, args.trace_path)
         
     elif args.mode == 0:
         t1 = ManualTask('Task 1', [(0, 50)])
