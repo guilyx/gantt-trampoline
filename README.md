@@ -125,7 +125,7 @@ optional arguments:
                         Register the path to the trace json file
 ```
 
-1. Run using a Trace of tasks : `python main.py 2 --tpl_path TPL_PATH --trace_path TRACE_PATH` (by default the paths goes to generated files in data/ ; if you use your own traces, the tpl_path is in the build/ directory of trampoline applications)
+1. Run using a Trace of tasks : `python main.py 2 --tpl_path="TPL_PATH" --trace_path="TRACE_PATH"` (by default the paths goes to generated files in data/ ; if you use your own traces, the tpl_path is in the build/ directory of trampoline applications)
 2. Run using your set of tasks with hardcoded periods : `python main.py 0`
 3. [NEW] Run using your set of tasks with scheduling algorithms : `python main.py 1`
 
