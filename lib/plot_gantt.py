@@ -109,7 +109,7 @@ class GanttPlot():
             self.ylabels[self.numberTasks] = task.name
             self.gnt.set_yticklabels(labels=self.ylabels)
             self.gnt.arrow(
-                task.activationTime, y_index[0]-0.2, 0, 2, color='red', width=1, head_width=0.6)
+                task.activationTime, y_index[0]-0.2, 0, 2, color='red', width=0.2, head_width=0.6)
 
         else:
             y_index = self.available_y[self.numberTasks]
@@ -126,7 +126,7 @@ class GanttPlot():
                 self.gnt.set_yticklabels(labels=self.ylabels)
                 self.numberTasks += 1
                 self.gnt.arrow(
-                    task.activationTime, y_index[0]-0.2, 0, 2, color='red', width=1, head_width=0.6)
+                    task.activationTime, y_index[0]-0.2, 0, 2, color='red', width=0.2, head_width=0.6)
 
     def terminateTask(self, task):
         y_index = self.tasksYticks[task.name]

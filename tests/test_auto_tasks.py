@@ -14,8 +14,8 @@ def test_feasible():
 
     ts = [t1, t2, t3]
 
-    for t in ts: 
-        sched.registerTask(t) 
+    for t in ts:
+        sched.registerTask(t)
     
     feasible = sched.check_feasibility()
 
@@ -31,8 +31,8 @@ def test_rm_schedulable():
 
     ts = [t1, t2, t3]
 
-    for t in ts: 
-        sched.registerTask(t) 
+    for t in ts:
+        sched.registerTask(t)
     
     sched.schedRateMonotonic(False)
     assert(sched.rm_schedulable == True)
@@ -46,8 +46,8 @@ def test_not_feasible():
 
     ts = [t1, t2, t3]
 
-    for t in ts: 
-        sched.registerTask(t) 
+    for t in ts:
+        sched.registerTask(t)
     
     feasible = sched.check_feasibility()
     assert(feasible == False)

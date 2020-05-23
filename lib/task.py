@@ -15,7 +15,7 @@ from lib.readTrace import TraceGenerator
 
 # Tony Masters strikes again, this time it's only to check if tasks are scheduled correctly though...
 
-DEFAULT_TASK_DURATION = 30
+DEFAULT_TASK_DURATION = 5
 
 
 class ManualTask():
