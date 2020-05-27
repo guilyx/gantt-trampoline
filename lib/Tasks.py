@@ -35,7 +35,6 @@ class ManualTask():
     def __str__(self):
         data = {
             "Name": self.name,
-            "Priority": self.priority,
             "ActivationTime": self.activationTime,
             "RunningPeriods": self.runningPeriods,
             "TerminationTime": self.terminationTime
@@ -86,7 +85,7 @@ class TaskMaster():
     def __scheduleTask(self, task):
         index_used = []
         for elem in task.runningPeriods:
-            for index_ in range(elem[0], elem[0] + elem[1]):
+            for index_ in range(int(elem[0]), int(elem[0] + elem[1])):
                 index_used.append(index_)
         for index in index_used:
             self.timelineAvailability[index] = False
@@ -96,7 +95,7 @@ class TaskMaster():
         conflicts = 0
 
         for elem in task.runningPeriods:
-            for index_ in range(elem[0], elem[0] + elem[1]):
+            for index_ in range(int(elem[0]), int(elem[0] + elem[1])):
                 index_running.append(index_)
 
         for index in index_running:
@@ -199,6 +198,7 @@ class AutomaticTask():
         self.period = period
         self.computation = computation
         self.deadline = deadline
+        self.priority = None
     
     def setUtilizationFactor(self, ui):
         self.ui = ui
@@ -247,6 +247,40 @@ class JobScheduler():
             return(False)
         else:
             return(True)
+    
+    def response_time_analysis(self, task, algorithm):
+        response_time = dict()
+        for t in self.tasks:
+            response_time[t] = []
+        ri = dict()
+
+        if algorithm == "Deadline Monotonic" or algorithm == "dm" or algorithm == "deadline monotonic" or algorithm ==  "deadline Monotonic":
+            self.__compute_priorities(1)
+        elif algorithm == "Rate Monotonic" or algorithm == "rate monotonic" or algorithm == "rm" or algorithm == "rate Monotonic":
+            self.__compute_priorities(0)
+        else:
+            print("Algorithm not found, exiting...")
+            sys.exit()
+
+        task_set = self.__get_subset()
+
+        for t in self.tasks:
+            ri[t] = .1
+            response_time[t] = 0
+
+        k = 0
+        for t in self.tasks:
+            if k == 0:
+                response_time[t][k] = self.tasks[t].computation
+            else:
+                while response_time[t] != ri[t]:
+                    ri[t] = response_time[t]
+                    response_time[t] = self.tasks[t].computation
+                    for tj in task_set[t]:
+                        response_time[t] = response_time[t] + (ri[t]/tj.period)*tj.computation
+            k += 1
+        return response_time
+        
     
     def schedRateMonotonic(self, plot=True):
         feasible = self.check_feasibility()
@@ -431,6 +465,7 @@ class JobScheduler():
         
         elif not(self.dm_schedulable):
             print("Deadline Monotonic not schedulable, do you want to use another algorithm ? --> ")
+    
 
     def __calcLCM(self):
         period_list = [self.tasks[t].period for t in self.tasks]
@@ -438,3 +473,26 @@ class JobScheduler():
         for elem in period_list[1:]:
             lcm = lcm*elem//gcd(lcm, elem)
         self.hyperperiod = lcm
+
+    def __compute_priorities(self, algorithm):
+        current_priority = len(self.tasks)
+        for i in range(len(self.tasks)):
+            if algorithm == 1:
+                highest_p = min(self.tasks, key=lambda o: self.tasks[o].deadline)
+            elif algorithm == 0:
+                highest_p = min(self.tasks, key=lambda o: self.tasks[o].period)
+            else:
+                print("Priority computation failed.")
+            self.tasks[highest_p].priority = current_priority
+            current_priority -= 1
+
+    def __get_subset(self):
+        subset = dict()
+        for t in self.tasks:
+            subset[t] = []
+            t_copy = self.tasks.copy()
+            t_copy.pop(t)
+            for sub_t in t_copy:
+                if (t_copy[sub_t].priority > self.tasks[t].priority):
+                    subset[t].append(self.tasks[t])
+        return subset
