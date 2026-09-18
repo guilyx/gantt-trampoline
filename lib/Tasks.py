@@ -334,6 +334,8 @@ class JobScheduler():
                 if elem == arrows_n[t.name][-1]:
                     continue
                 for i in range(self.hyperperiod):
+                    if elem + i + t.computation > self.hyperperiod:
+                        break
                     if availability[elem + i] == True:
                         for j in range(t.computation):
                             if availability[elem + i + j] == True:
@@ -368,6 +370,8 @@ class JobScheduler():
                 if elem == arrows_n[t.name][-1]:
                     continue
                 for i in range(self.hyperperiod):
+                    if elem + i + t.computation > self.hyperperiod:
+                        break
                     if availability[elem + i] == True:
                         for j in range(t.computation):
                             if availability[elem + i + j] == True:
